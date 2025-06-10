@@ -45,6 +45,7 @@ export const useUpdatePost = () => {
       queryClient.invalidateQueries({ queryKey: ["post", variables.id] });
       console.log("Post updated successfully!", data);
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       console.error("Failed to update post:", error.message || error);
     },

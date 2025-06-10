@@ -2,14 +2,26 @@
 
 import { usePost } from "@/hooks/usePosts";
 import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function PostDetailsPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const postId = parseInt(params.id);
-  const { data: post, isLoading, isError } = usePost(postId);
+  const [postId, setPostId] = useState<number | null>(null);
+
+  useEffect(() => {
+    params.then(({ id }) => {
+      setPostId(parseInt(id));
+    });
+  }, [params]);
+
+  const { data: post, isLoading, isError } = usePost(postId || 0);
+
+  if (postId === null) {
+    return <div>Loading...</div>;
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;

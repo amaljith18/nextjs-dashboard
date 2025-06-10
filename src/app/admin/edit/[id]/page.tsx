@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
@@ -15,7 +16,7 @@ export default function EditPostPage() {
   const { data: post, isLoading, isError } = usePost(postId);
   const {
     mutate: updatePost,
-    isLoading: isUpdating,
+    isPending: isUpdating,
     error: updateError,
   } = useUpdatePost();
 
